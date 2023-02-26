@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  movies-api:
+    container_name: movies_api
+    image: backend-movies
+    build:
+      dockerfile: ./Dockerfile
+    ports:
+      - 8081:8080
+    environment:
+      MYSQL_DB_HOST: movies-db
+      MYSQL_DB_NAME: movies_api
+      MYSQL_DB_USER: marcos
+      MYSQL_DB_PASSWORD: aurelio
+    depends_on:
+      - movies-db
+  movies-db:
+    image: mysql:5.6
+    container_name: movies_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: movies_api
+      MYSQL_USER: marcos
+      MYSQL_PASSWORD: aurelio
